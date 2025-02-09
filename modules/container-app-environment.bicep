@@ -2,7 +2,7 @@ param environmentName string
 param keyVaultName string
 param location string = resourceGroup().location
 
-resource containerAppEnvironiment 'Microsoft.App/managedEnvironments@2022-03-01' = {
+resource containerAppEnvironiment 'Microsoft.App/managedEnvironments@2024-03-01' = {
   name: '${environmentName}-env'
   location: location
   properties:{
@@ -26,7 +26,7 @@ resource appInsights 'Microsoft.Insights/components@2020-02-02' = {
   }
 }
 
-resource logAnalyticsWorkspace'Microsoft.OperationalInsights/workspaces@2021-06-01' = {
+resource logAnalyticsWorkspace'Microsoft.OperationalInsights/workspaces@2023-09-01' = {
   name: '${environmentName}-law'
   location: location
   properties: {
@@ -37,11 +37,11 @@ resource logAnalyticsWorkspace'Microsoft.OperationalInsights/workspaces@2021-06-
   }
 }
 
-resource keyVault 'Microsoft.KeyVault/vaults@2021-11-01-preview' existing = {
+resource keyVault 'Microsoft.KeyVault/vaults@2023-02-01' existing = {
   name: keyVaultName
 }
 
-resource appInsightsConnectionStringSecret 'Microsoft.KeyVault/vaults/secrets@2021-11-01-preview' = {
+resource appInsightsConnectionStringSecret 'Microsoft.KeyVault/vaults/secrets@2023-07-01' = {
   name: 'dotnet-api-appinsights-connectionstring'
   parent: keyVault
   properties: {
